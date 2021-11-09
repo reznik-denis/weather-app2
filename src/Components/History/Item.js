@@ -1,7 +1,7 @@
-import timeConverter from '../../../service/timeConverter';
-import s from '../SearchHistory.module.css'
+import timeConverter from '../../service/timeConverter';
+import s from './history.module.css'
 
-export default function HistoryItemEn({ state }) {
+export default function Item({state}) {
     const { name, sys, weather, main } = state;
     const icon = `https://openweathermap.org/img/wn/${weather[0].icon}@2x.png`
     return <div><h3>{name}</h3>

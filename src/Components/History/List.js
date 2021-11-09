@@ -1,18 +1,18 @@
-import s from './SearchHistory.module.css'
+import s from './history.module.css'
 import { useSelector, useDispatch } from 'react-redux';
 
-import HistoryItem from './HistoryItem';
+import Item from './Item';
 import { currentSearch } from '../../redux/actions';
-import { getSerchHistory } from '../../redux/selectors';
+import { getHistory } from '../../redux/selectors';
 
-export default function SearchHistory() {
-    const state = useSelector(getSerchHistory)
+export default function List() {
+    const state = useSelector(getHistory)
     const dispatch = useDispatch();
     return <div>
         <ul className={s.list}>
                 {state.slice(0,10).map((s) => 
                     <li key={s.date} onClick={()=>dispatch(currentSearch(s.name))}>
-                        <HistoryItem state={s}/>
+                        <Item state={s}/>
                    </li>
                 )}
         </ul>

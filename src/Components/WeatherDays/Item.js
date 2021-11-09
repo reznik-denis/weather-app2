@@ -1,10 +1,10 @@
-import s from '../WeatherSevenDays.module.css'
+import s from './weatherThreeDays.module.css'
 
-import {unixDayEn} from '../../../service/dayConverter'
+import { unixDay } from '../../service/dayConverter'
 
-export default function WeatherItemEn({ state }) {
+export default function Item({state}) {
     const { dt, weather, temp } = state;
-    const dayOfWeek = unixDayEn(dt)
+    const dayOfWeek = unixDay(dt)
     const icon = `https://openweathermap.org/img/wn/${weather[0].icon}@2x.png`
     return <div><h3>{dayOfWeek}</h3>
                 {temp.day && <p className={s.temp}>{temp.day > 0 ? `+${Math.round(temp.day)}` : Math.round(temp.day)}</p>}

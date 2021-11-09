@@ -7,21 +7,14 @@ import {
     fetchSearchSevenDaysAgoRequest,
     fetchSearchSevenDaysAgoSuccess,
     fetchSearchSevenDaysAgoError,
-    currentLanguage
 } from './actions';
 
 let firstRender = true;
 
-const currentSearchReducer = createReducer('Киев', {
+const currentSearchReducer = createReducer('minsk', {
     [currentSearch]: (state, action) => {
         return action.payload ? action.payload : state;
     },
-})
-
-const currentLanguageReduccer = createReducer('ru', {
-    [currentLanguage]: (state, action) => {
-        return action.payload ? action.payload : state;
-    }
 })
 
 const searchReducer = createReducer('', {
@@ -58,7 +51,6 @@ const error = createReducer('', {
 
 const searchRedusser = combineReducers({
     search: currentSearchReducer,
-    language: currentLanguageReduccer
 })
 
 export default combineReducers({

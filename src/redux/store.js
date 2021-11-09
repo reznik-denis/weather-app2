@@ -13,7 +13,7 @@ import storage from 'redux-persist/lib/storage';
 const persistConfig = {
     key: 'root',
     storage,
-    blacklist: ['current', 'currentFetch', 'error', 'loading', 'weatherSevenDay'],
+    blacklist: ['currentFetch', 'error', 'loading', 'weatherSevenDay'],
 }
 
 

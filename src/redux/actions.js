@@ -1,7 +1,6 @@
 import { createAction} from "@reduxjs/toolkit";
 
 export const currentSearch = createAction('form/currentSearch');
-export const currentLanguage = createAction('form/currentLanguage');
 
 export const fetchSerchRequest = createAction('app/fetchSerchRequest');
 export const fetchSerchSuccess = createAction('app/fetchSerchSuccess');
