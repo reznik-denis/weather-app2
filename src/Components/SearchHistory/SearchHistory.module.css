@@ -1,0 +1,31 @@
+.list {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  padding: 0;
+}
+
+.list > li {
+  width: 250px;
+  margin: 10px;
+  border: 2px solid #2e9afe;
+  border-radius: 8px;
+  padding: 10px;
+  cursor: pointer;
+  background-color: #fafafa;
+  box-shadow: 5px 5px 8px 4px rgba(34, 60, 80, 0.2);
+  transition-property: transform;
+  transition-duration: 200ms;
+  transition-timing-function: ease-in;
+}
+
+.list > li:hover,
+.list > li:focus {
+  transform: scale(1.05, 1.05);
+}
+
+.temp {
+  font-size: 30px;
+  font-weight: 700;
+}

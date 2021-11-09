@@ -1,0 +1,26 @@
+.title {
+  font-size: 30px;
+}
+
+.list {
+  list-style: none;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  padding: 0;
+}
+
+.list > li {
+  width: 150px;
+  border: 2px solid #2e9afe;
+  padding: 10px 15px 10px 15px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  background-color: #fafafa;
+  box-shadow: 5px 5px 8px 4px rgba(34, 60, 80, 0.2);
+}
+
+.temp {
+  font-size: 20px;
+  font-weight: 700;
+}

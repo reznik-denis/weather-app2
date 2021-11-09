@@ -1,0 +1,49 @@
+.form {
+  display: block;
+  margin-right: 10px;
+}
+
+.lableForm {
+  display: block;
+  font-size: 30px;
+  font-weight: 700;
+  margin-top: 45px;
+}
+
+.inputLable {
+  width: 400px;
+  padding: 20px;
+  border-radius: 8px;
+  border: 2px solid #2e9afe;
+  font-size: 20px;
+  box-shadow: 5px 5px 8px 4px rgba(34, 60, 80, 0.2);
+}
+
+.button {
+  display: block;
+  border: none;
+  font-size: 30px;
+  font-weight: 700;
+  background-color: #2e9afe;
+  border-radius: 10px;
+  padding: 17px 25px 16px 25px;
+  margin-left: 25px;
+  box-shadow: 5px 5px 8px 4px rgba(34, 60, 80, 0.2);
+  cursor: pointer;
+
+  transition: transform;
+  transition-timing-function: ease-in;
+  transition-duration: 200ms;
+}
+
+.button:hover,
+.button:focus {
+  transform: scale(1.1, 1.1);
+}
+
+.flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
+}
