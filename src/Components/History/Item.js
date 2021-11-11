@@ -1,4 +1,5 @@
 import timeConverter from '../../service/timeConverter';
+import LazyLoad from 'react-lazyload';
 import s from './history.module.css'
 
 export default function Item({state}) {
@@ -10,7 +11,9 @@ export default function Item({state}) {
                 {sys.sunset && <p>Sunset time - {timeConverter(sys.sunset)}</p>}
                 {weather[0].description && <div className={s.flex}>
                     <p>Weather condition </p>
+                <LazyLoad height={100} once>
                     <img className={s.icon} src={icon} alt={weather[0].main} />
+                </LazyLoad> 
                     <p>{weather[0].description}</p></div>}
             </div>
 };

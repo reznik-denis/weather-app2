@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux';
 
 import { useParams, useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useEffect} from 'react';
 
 import { currentSearch } from '../redux/actions'
 
@@ -38,8 +38,8 @@ export default function WeatherForecast() {
         {loader ? <Loader /> : (<>
         <SectionHours/>
         <SectionDays days='7' />
-        </>)}
         <Form />
         {history && <SectionHistory />}
+        </>)}
     </>
 }

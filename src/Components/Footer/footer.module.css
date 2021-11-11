@@ -7,3 +7,8 @@
 img[alt='GitHub'] {
   margin-right: 20px;
 }
+
+.flex {
+  display: flex;
+  justify-content: center;
+}

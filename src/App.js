@@ -1,14 +1,16 @@
 import './App.css';
-import { useEffect } from 'react';
+import { useEffect, lazy, Suspense } from 'react';
 import { ToastContainer } from 'react-toastify';
 import { useSelector, useDispatch } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
 
 import AppBar from './Components/AppBar/AppBar';
-import WeatherForecast from "./views/WeatherForecast";
-import Main from './views/Main';
+import Loader from './Components/Loader/Loader'
 import { getCityName, getCurrentWeather} from './redux/selectors';
 import { fetchSearch, fetchSearchSevenDaysAgo } from './redux/operations';
+
+const Main = lazy(() => import('./views/Main.js' /* webpackChunkName: "main-view" */));
+const WeatherForecast = lazy(() => import('./views/WeatherForecast.js' /* webpackChunkName: "weatherForecast-view" */));
 
 
 function App() {
@@ -32,10 +34,17 @@ function App() {
   return <div className="App">
     <Routes>
       <Route path="/" element={<AppBar />}>
-          <Route index element={<Main/>}/>
-          <Route path="/in/:city" element={<WeatherForecast/>}/>
+          <Route index element={
+          <Suspense fallback={<Loader />}>
+            <Main/>
+          </Suspense>}/>
+          <Route path="/in/:city" element={
+          <Suspense fallback={<Loader />}>
+            <WeatherForecast/>
+          </Suspense>}/>
       </Route>
     </Routes>
+    
     <ToastContainer
             position="bottom-right"
             autoClose={3000}

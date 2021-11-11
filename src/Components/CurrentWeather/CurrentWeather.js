@@ -1,4 +1,5 @@
 import s from './currentWeather.module.css';
+import LazyLoad from 'react-lazyload';
 import timeConverter from '../../service/timeConverter';
 import { getCurrentWeather } from '../../redux/selectors'
 import { useSelector} from 'react-redux';
@@ -26,7 +27,9 @@ export default function CurrentWeather() {
                 {sys.sunset && <p>Sunset time - {timeConverter(sys.sunset)}</p>}
                 {weather[0].description && <div className={s.flex}>
                     <p>Weather condition </p>
-                    <img className={s.icon} src={icon} alt={weather[0].main} />
+                    <LazyLoad height={100} once>
+                        <img className={s.icon} src={icon} alt={weather[0].main} />
+                    </LazyLoad>
                     <p>{weather[0].description}</p>
                 </div>}
             </div>   
