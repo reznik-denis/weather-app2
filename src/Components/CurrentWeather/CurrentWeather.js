@@ -1,15 +1,14 @@
 import s from './currentWeather.module.css';
 import LazyLoad from 'react-lazyload';
-import timeConverter from '../../service/timeConverter';
-import { getCurrentWeather } from '../../redux/selectors'
+import { timeConverter } from 'service';
+import { selectors } from '../../redux'
 import { useSelector} from 'react-redux';
 
 
 export default function CurrentWeather() {
-    const { name, sys, main, wind, weather } = useSelector(getCurrentWeather);
+    const { sys, main, wind, weather } = useSelector(selectors.getDitailsWeather);
     const icon = `https://openweathermap.org/img/wn/${weather[0].icon}@2x.png`
     return <div>
-        <h2 className={s.title}>Weather in <span className={s.capitalize}>{name}</span></h2>
         <div className={s.box}>
             {main.temp && <p className={s.temp}>{main.temp > 0 ? `+${Math.round(main.temp)}` : Math.round(main.temp)}С</p>}
             <div className={s.margin}>

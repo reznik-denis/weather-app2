@@ -15,7 +15,7 @@ export function fetchWeather(name) {
         }).then(data => data);
 }
 
-export function fetchWeatherSevenDaysAgo(lat, lon) {
+export function fetchWeatherSevenDays(lat, lon) {
     const KEY = '4092c7739033aaf55788405d99619a68';
     const URL = 'https://api.openweathermap.org/data/2.5/';
     return fetch(`${URL}onecall?lat=${lat}&lon=${lon}&units=metric&lang=en&appid=${KEY}`)

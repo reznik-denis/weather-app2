@@ -1,4 +1,4 @@
-import timeConverter from '../../service/timeConverter';
+import { timeConverter } from 'service';
 import LazyLoad from 'react-lazyload';
 import s from './history.module.css'
 

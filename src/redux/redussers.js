@@ -1,24 +1,17 @@
 import { createReducer, combineReducers } from "@reduxjs/toolkit";
-import {
-    currentSearch,
-    fetchSerchRequest,
-    fetchSerchSuccess,
-    fetchSerchError,
-    fetchSearchSevenDaysAgoRequest,
-    fetchSearchSevenDaysAgoSuccess,
-    fetchSearchSevenDaysAgoError,
-} from './actions';
+import {currentSearch} from './actions';
+import {fetchSearch, fetchSearchSevenDays} from './operations'
 
 let firstRender = true;
 
-const currentSearchReducer = createReducer('minsk', {
+const cityReducer = createReducer('minsk', {
     [currentSearch]: (state, action) => {
         return action.payload ? action.payload : state;
     },
 })
 
-const searchReducer = createReducer('', {
-    [fetchSerchSuccess]: (state, action) => {
+const historyReducer = createReducer('', {
+    [fetchSearch.fulfilled]: (state, action) => {
         if (firstRender) {
             firstRender = false;
             return state
@@ -28,36 +21,33 @@ const searchReducer = createReducer('', {
     }
 })
 
-const FetchReduccer = createReducer(null, {
-    [fetchSerchSuccess]: (_, action) => action.payload
+const ditailsWeatherReduccer = createReducer(null, {
+    [fetchSearch.fulfilled]: (_, action) => action.payload
 });
 
-const fetchAtFiveDayWeatherReduccer = createReducer('', {
-    [fetchSearchSevenDaysAgoSuccess]: (_, action) => action.payload
+const weatherDaysReduccer = createReducer('', {
+    [fetchSearchSevenDays.fulfilled]: (_, action) => action.payload
 })
 
 const loading = createReducer(false, {
-  [fetchSerchRequest]: () => true,
-  [fetchSerchSuccess]: () => false,
-  [fetchSerchError]: () => false,
+    [fetchSearch.pending]: () => true,
+    [fetchSearch.fulfilled]: () => false,
+    [fetchSearch.rejected]: () => false,
 });
 
-const error = createReducer('', {
-    [fetchSerchError]: (_, action) => action.payload,
-    [fetchSerchRequest]: () => '',
-    [fetchSearchSevenDaysAgoError]: (_, action) => action.payload,
-    [fetchSearchSevenDaysAgoRequest]: () => null,
+const error = createReducer(null, {
+    [fetchSearch.rejected]: (_, action) => action.payload,
+    [fetchSearch.pending]: () => null,
+    [fetchSearchSevenDays.rejected]: (_, action) => action.payload,
+    [fetchSearchSevenDays.pending]: () => null,
 });
 
-const searchRedusser = combineReducers({
-    search: currentSearchReducer,
-})
 
 export default combineReducers({
-    current: searchRedusser,
-    currentFetch: FetchReduccer,
-    searchHistory: searchReducer,
-    weatherSevenDay: fetchAtFiveDayWeatherReduccer,
+    current: cityReducer,
+    ditailsWeather: ditailsWeatherReduccer,
+    history: historyReducer,
+    weatherSevenDay: weatherDaysReduccer,
     loading,
     error,
 })

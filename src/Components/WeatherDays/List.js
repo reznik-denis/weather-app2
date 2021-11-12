@@ -1,10 +1,10 @@
 import s from './weatherThreeDays.module.css';
 import { useSelector } from 'react-redux';
-import { getWeatherDays } from '../../redux/selectors';
+import { selectors } from '../../redux';
 import Item from './Item';
 
 export default function List({days}) {
-    const state = useSelector(getWeatherDays);
+    const state = useSelector(selectors.getWeatherDays);
     const currentDays = Number(days) + 1;
     return <div>
         <ul className={s.list}>

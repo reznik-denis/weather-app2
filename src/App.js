@@ -4,45 +4,50 @@ import { ToastContainer } from 'react-toastify';
 import { useSelector, useDispatch } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
 
-import AppBar from './Components/AppBar/AppBar';
-import Loader from './Components/Loader/Loader'
-import { getCityName, getCurrentWeather} from './redux/selectors';
-import { fetchSearch, fetchSearchSevenDaysAgo } from './redux/operations';
+import { AppBar } from 'Components/AppBar';
+import { Loader } from 'Components/Loader'
+import { selectors } from './redux';
+import { operation } from './redux';
 
 const Main = lazy(() => import('./views/Main.js' /* webpackChunkName: "main-view" */));
 const WeatherForecast = lazy(() => import('./views/WeatherForecast.js' /* webpackChunkName: "weatherForecast-view" */));
+const NoFoundPage = lazy(() => import('./views/NoFoundPage.js' /* webpackChunkName: "noFoundPage-view" */))
 
 
 function App() {
-  const name = useSelector(getCityName);
-  const currentFetch = useSelector(getCurrentWeather);
+  const name = useSelector(selectors.getCityName);
+  const currentFetch = useSelector(selectors.getDitailsWeather);
   
   const dispatch = useDispatch();
 
   useEffect(() => {
     if (name) {
-       dispatch(fetchSearch(name))
+       dispatch(operation.fetchSearch(name))
     };
   }, [dispatch, name]);
 
   useEffect(() => {
     if (currentFetch) {
-      dispatch(fetchSearchSevenDaysAgo(currentFetch.coord.lat, currentFetch.coord.lon))
+      dispatch(operation.fetchSearchSevenDays(currentFetch.coord))
     };
   }, [dispatch, currentFetch]);
 
   return <div className="App">
     <Routes>
-      <Route path="/" element={<AppBar />}>
+        <Route path="/" element={<AppBar />}>
           <Route index element={
-          <Suspense fallback={<Loader />}>
-            <Main/>
-          </Suspense>}/>
+              <Suspense fallback={<Loader />}>
+                <Main/>
+              </Suspense>}/>
           <Route path="/in/:city" element={
-          <Suspense fallback={<Loader />}>
-            <WeatherForecast/>
-          </Suspense>}/>
-      </Route>
+              <Suspense fallback={<Loader />}>
+                <WeatherForecast/>
+              </Suspense>} />
+          <Route path="*" element={
+              <Suspense fallback={<Loader />}>
+                <NoFoundPage/>
+              </Suspense>}/>
+        </Route>
     </Routes>
     
     <ToastContainer

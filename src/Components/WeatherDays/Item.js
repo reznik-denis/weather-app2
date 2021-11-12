@@ -1,11 +1,11 @@
 import s from './weatherThreeDays.module.css'
 import LazyLoad from 'react-lazyload';
 
-import { unixDay } from '../../service/dayConverter'
+import { dayConverter } from 'service'
 
 export default function Item({state}) {
     const { dt, weather, temp } = state;
-    const dayOfWeek = unixDay(dt)
+    const dayOfWeek = dayConverter.unixDay(dt)
     const icon = `https://openweathermap.org/img/wn/${weather[0].icon}@2x.png`
     return <div><h3>{dayOfWeek}</h3>
                 {temp.day && <p className={s.temp}>{temp.day > 0 ? `+${Math.round(temp.day)}` : Math.round(temp.day)}</p>}

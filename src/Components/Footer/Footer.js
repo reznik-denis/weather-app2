@@ -1,7 +1,7 @@
 import s from "./footer.module.css";
 import LazyLoad from 'react-lazyload';
-import GitHub from "../../static/image/github.png";
-import Linkedin from "../../static/image/linkedin.png";
+import GitHub from "static/image/github.png";
+import Linkedin from "static/image/linkedin.png";
 
 export default function Footer() {
     return <div className={s.title}>

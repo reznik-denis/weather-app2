@@ -1,13 +1,14 @@
 import { useSelector} from 'react-redux';
 
-import { getWeatherDays } from '../../redux/selectors';
-import Section from '../Section/Section';
+import { selectors } from '../../redux';
+import { Section } from '../Section';
 import List from './List';
 
 export default function SectionDays({days}) {
-    const state = useSelector(getWeatherDays);
+    const state = useSelector(selectors.getWeatherDays);
+    const name = useSelector(selectors.getDitailsWeather);
     
-        return <Section title={` ${days} days weather forecast`}>
+    return <Section title={` ${days} days weather forecast`} name={name.name}>
             {state && <List days={days}/>}
         </Section>;
 };

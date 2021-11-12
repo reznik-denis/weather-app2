@@ -1,15 +1,15 @@
 import s from './form.module.css';
-import { useDispatch } from 'react-redux';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import 'react-toastify/dist/ReactToastify.css';
 import { toast } from 'react-toastify';
 
-import { validationName } from '../../service/validation';
-import { currentSearch } from '../../redux/actions'
+import { validation } from 'service';
 
 export default function Form() {
     const [search, setSearch] = useState('');
-    const dispatch = useDispatch();
+    const navigate = useNavigate();
   
     const handleOnChangeInput = event => {
         setSearch(event.currentTarget.value.toLowerCase());
@@ -21,20 +21,20 @@ export default function Form() {
         if (search.trim() === '') {
             toast.error("Enter city!");
             return
-        } else if (validationName(search)) {
+        } else if (validation(search)) {
             toast.error("Your city invalid!");
             reset();
             return
         } else {
-            dispatch(currentSearch(search))
-        };
-    
+            navigate(`/in/${search}`);                
+            // dispatch(currentSearch(search))
+        }
         reset();
-    }
-
-    const reset = () => {
-        setSearch('');
     };
+
+    function reset() {
+        setSearch('');
+    }
 
     return <form className={s.form} onSubmit={onSubmitHandler}>
         <label className={s.lableForm} htmlFor="city">Change your city</label>

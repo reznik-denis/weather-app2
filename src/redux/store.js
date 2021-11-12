@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";   
-import searchReducer from './redussers';
+import mainReducer from './redussers';
 import {
     persistStore, persistReducer,
     FLUSH,
@@ -13,13 +13,13 @@ import storage from 'redux-persist/lib/storage';
 const persistConfig = {
     key: 'root',
     storage,
-    blacklist: ['currentFetch', 'error', 'loading', 'weatherSevenDay'],
+    blacklist: ['ditailsWeather', 'error', 'loading', 'weatherSevenDay'],
 }
 
 
 export const store = configureStore({
     reducer: {
-    main: persistReducer(persistConfig, searchReducer)
+    main: persistReducer(persistConfig, mainReducer)
 },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware({
     serializableCheck: {

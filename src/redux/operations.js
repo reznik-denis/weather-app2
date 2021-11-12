@@ -1,29 +1,28 @@
-import {
-    fetchSerchRequest,
-    fetchSerchSuccess,
-    fetchSerchError,
-    fetchSearchSevenDaysAgoRequest,
-    fetchSearchSevenDaysAgoSuccess,
-    fetchSearchSevenDaysAgoError
-} from './actions';
-import { fetchWeather, fetchWeatherSevenDaysAgo } from '../service/fetchWeather'
+import { createAsyncThunk } from '@reduxjs/toolkit';
+import { fetchWether } from 'service'
 
-export const fetchSearch = (name) => async dispatch => {
-    dispatch(fetchSerchRequest());
-    try {
-        const search = await fetchWeather(name)
-        dispatch(fetchSerchSuccess(search));
-    } catch (error) {
-        dispatch(fetchSerchError(error.toString()));
-    };
-}
+export const fetchSearchSevenDays = createAsyncThunk(
+    'app/fetchSearchSevenDays',
+    async ({ lat, lon }, { rejectWithValue }) => {
+        try {
+            const search = await fetchWether.fetchWeatherSevenDays(lat, lon)
+            return search;
+        } catch (error) {
+            return rejectWithValue(error.message);
+        }
+        
+    },
+);
 
-export const fetchSearchSevenDaysAgo = (lat, lon) => async dispatch => {
-    dispatch(fetchSearchSevenDaysAgoRequest());
-    try {
-        const search = await fetchWeatherSevenDaysAgo(lat, lon)
-        dispatch(fetchSearchSevenDaysAgoSuccess(search));
-    } catch (error) {
-        dispatch(fetchSearchSevenDaysAgoError(error.toString()));
-    };
-}
+export const fetchSearch = createAsyncThunk(
+    'app/fetchSerch',
+    async (name, { rejectWithValue }) => {
+        try {
+            const search = await fetchWether.fetchWeather(name);
+            return search;
+        } catch (error) {
+            return rejectWithValue(error.message);
+        }
+        
+    },
+);
