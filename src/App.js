@@ -1,4 +1,3 @@
-import './App.css';
 import { useEffect, lazy, Suspense } from 'react';
 import { ToastContainer } from 'react-toastify';
 import { useSelector, useDispatch } from 'react-redux';
@@ -6,6 +5,7 @@ import { Route, Routes } from 'react-router-dom';
 
 import { AppBar } from 'Components/AppBar';
 import { Loader } from 'Components/Loader'
+import {Container} from 'Components/Container';
 import { selectors } from './redux';
 import { operation } from './redux';
 
@@ -17,7 +17,6 @@ const NoFoundPage = lazy(() => import('./views/NoFoundPage.js' /* webpackChunkNa
 function App() {
   const name = useSelector(selectors.getCityName);
   const currentFetch = useSelector(selectors.getDitailsWeather);
-  
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -32,7 +31,7 @@ function App() {
     };
   }, [dispatch, currentFetch]);
 
-  return <div className="App">
+  return <><Container>
     <Routes>
         <Route path="/" element={<AppBar />}>
           <Route index element={
@@ -49,12 +48,12 @@ function App() {
               </Suspense>}/>
         </Route>
     </Routes>
-    
+  </Container>
     <ToastContainer
             position="bottom-right"
             autoClose={3000}
           />
-  </div>
+  </>
 }
 
 export default App;

@@ -20,12 +20,3 @@
 .list > li:last-child {
   margin-right: 0;
 }
-
-.temp {
-  font-size: 20px;
-  font-weight: 700;
-}
-
-.icon {
-  width: 50px;
-}

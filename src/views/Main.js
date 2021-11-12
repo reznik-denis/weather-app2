@@ -7,11 +7,9 @@ import { SectionDays } from 'Components/WeatherDays';
 import { Loader } from 'Components/Loader';
 
 export default function Main() {
-    // const error = useSelector(selectors.getError);
     const loader = useSelector(selectors.getLoading);
 
     return (<>
-        {/* {error && <h1>{error}</h1>} */}
         {loader ? <Loader /> : (<>
         <ButtonGroup/>
         <SectionCurrent />

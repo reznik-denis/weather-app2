@@ -1,5 +1,5 @@
 import s from './currentWeather.module.css';
-import LazyLoad from 'react-lazyload';
+import { ItemList } from 'Components/ItemList';
 import { timeConverter } from 'service';
 import { selectors } from '../../redux'
 import { useSelector} from 'react-redux';
@@ -7,7 +7,6 @@ import { useSelector} from 'react-redux';
 
 export default function CurrentWeather() {
     const { sys, main, wind, weather } = useSelector(selectors.getDitailsWeather);
-    const icon = `https://openweathermap.org/img/wn/${weather[0].icon}@2x.png`
     return <div>
         <div className={s.box}>
             {main.temp && <p className={s.temp}>{main.temp > 0 ? `+${Math.round(main.temp)}` : Math.round(main.temp)}С</p>}
@@ -24,13 +23,8 @@ export default function CurrentWeather() {
             <div className={s.width}>
                 {sys.sunrise && <p>Sunrise time - {timeConverter(sys.sunrise)}</p>}
                 {sys.sunset && <p>Sunset time - {timeConverter(sys.sunset)}</p>}
-                {weather[0].description && <div className={s.flex}>
-                    <p>Weather condition </p>
-                    <LazyLoad height={100} once>
-                        <img className={s.icon} src={icon} alt={weather[0].main} />
-                    </LazyLoad>
-                    <p>{weather[0].description}</p>
-                </div>}
+                <p>Weather condition </p>
+                <ItemList weather={weather}/>
             </div>   
         </div>
     </div>
