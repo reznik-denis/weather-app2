@@ -6,9 +6,9 @@ import List from './List';
 
 export default function SectionDays() {
     const state = useSelector(selectors.getWeatherDays);
-    const name = useSelector(selectors.getDitailsWeather);
+    const {date, name} = useSelector(selectors.getDitailsWeather);
     
-    return <Section title={`Hourly weather forecast`} name={name.name} >
+    return ((date !== 0) && <Section title={`Hourly weather forecast`} name={name} >
             {state && <List/>}
-        </Section>;
+        </Section >)
 };

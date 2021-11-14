@@ -6,7 +6,7 @@ import { currentSearch } from '../../redux/actions';
 export default function ButtonCity({ name }) {
     const dispatch = useDispatch();
     
-    const handleSubmit = event => {
+    const handleSubmit = () => {
         dispatch(currentSearch(name))
     }
 

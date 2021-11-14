@@ -1,6 +1,7 @@
 import { createReducer, combineReducers } from "@reduxjs/toolkit";
 import {currentSearch} from './actions';
-import {fetchSearch, fetchSearchSevenDays} from './operations'
+import { fetchSearch, fetchSearchSevenDays } from './operations';
+import {initialDailsState} from './InitialState'
 
 let firstRender = true;
 
@@ -21,7 +22,7 @@ const historyReducer = createReducer('', {
     }
 })
 
-const ditailsWeatherReduccer = createReducer(null, {
+const ditailsWeatherReduccer = createReducer(initialDailsState, {
     [fetchSearch.fulfilled]: (_, action) => action.payload
 });
 

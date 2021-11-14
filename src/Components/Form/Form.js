@@ -27,7 +27,6 @@ export default function Form() {
             return
         } else {
             navigate(`/in/${search}`);                
-            // dispatch(currentSearch(search))
         }
         reset();
     };
